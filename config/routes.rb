@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       resources :treats
       resources :walks
       resources :medications
+      resources :general_healths
+
     end
   end
 end

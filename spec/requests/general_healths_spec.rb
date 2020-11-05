@@ -39,7 +39,7 @@ RSpec.describe 'General Health API', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find General Health/)
+        expect(response.body).to match(/Couldn't find GeneralHealth/)
       end
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe 'General Health API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Hunger_level can't be blank, Energy_level can't be blank, Date can't be blank/)
+          .to match(/Validation failed: Date can't be blank, Hunger level can't be blank/)
       end
     end
   end
