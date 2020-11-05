@@ -26,7 +26,7 @@ RSpec.describe 'Treats API', type: :request do
     before { get "/api/v1/treats/#{treat_id}" }
 
     context 'when the record exists' do
-      it 'returns the todo' do
+      it 'returns the treat' do
         expect(json).not_to be_empty
         expect(json['id']).to eq(treat_id)
       end

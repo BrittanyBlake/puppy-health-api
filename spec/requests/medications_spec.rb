@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Foods API', type: :request do
-  let!(:foods) { create_list(:food, 3) }
-  let(:food_id) { foods.first.id }
+RSpec.describe 'Medication API', type: :request do
+     let!(:medications) { create_list(:medication, 3) }
+  let(:medication_id) { medications.first.id }
 
-  describe 'GET Foods' do
-    before { get '/api/v1/foods' }
+  describe 'GET Medication' do
+    before { get '/api/v1/medications' }
 
-    it 'returns foods' do
+    it 'returns medication' do
       expect(json).not_to be_empty
       expect(json.size).to eq(3)
     end
@@ -17,13 +17,13 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  describe 'GET /foods/:id' do
-    before { get "/api/v1/foods/#{food_id}" }
+  describe 'GET /medications/:id' do
+    before { get "/api/v1/medications/#{medication_id}" }
 
     context 'when the record exists' do
-      it 'returns the food' do
+      it 'returns the medication' do
         expect(json).not_to be_empty
-        expect(json['id']).to eq(food_id)
+        expect(json['id']).to eq(medication_id)
       end
 
       it 'returns status code 200' do
@@ -32,26 +32,26 @@ RSpec.describe 'Foods API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:food_id) { 100 }
+      let(:medication_id) { 100 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Food/)
+        expect(response.body).to match(/Couldn't find Medication/)
       end
     end
   end
 
-  describe 'POST /api/v1/foods' do
-    let(:valid_attributes) { { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020"} }
+  describe 'POST /api/v1/medications' do
+    let(:valid_attributes) { { name: 'Elm', use: 'Learn', dosage:'Twice a day'} }
 
     context 'when the request is valid' do
-      before { post '/api/v1/foods', params: valid_attributes }
+      before { post '/api/v1/medications', params: valid_attributes }
 
-      it 'creates a food' do
-        expect(json['brand']).to eq('Caesar Salad')
+      it 'creates a medication' do
+        expect(json['name']).to eq('Elm')
       end
 
       it 'returns status code 201' do
@@ -60,7 +60,7 @@ RSpec.describe 'Foods API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/foods', params: { brand: 'Foobar' } }
+      before { post '/api/v1/medications', params: { name: 'Foobar' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -68,16 +68,16 @@ RSpec.describe 'Foods API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Amount can't be blank, Date can't be blank, Time can't be blank/)
+          .to match(/Validation failed: Use can't be blank, Dosage can't be blank/)
       end
     end
   end
 
-  describe 'PUT /api/v1/foods/:id' do
-    let(:valid_attributes) { { brand: 'Cobb Salad', amount: '20', time:'11:53', date: "Sat, 07 Nov 2020"} }
+  describe 'PUT /api/v1/medications/:id' do
+    let(:valid_attributes) { { name: 'Elm', use: 'learn', dosage:'Once a day'} }
 
     context 'when the record exists' do
-      before { put "/api/v1/foods/#{food_id}", params: valid_attributes }
+      before { put "/api/v1/medications/#{medication_id}", params: valid_attributes }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -89,11 +89,12 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  describe 'DELETE /api/v1/foods/:id' do
-    before { delete "/api/v1/foods/#{food_id}" }
+  describe 'DELETE /api/v1/medications/:id' do
+    before { delete "/api/v1/medications/#{medication_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
     end
   end
+
 end

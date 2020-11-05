@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :foods
       resources :treats
       resources :walks
+      resources :medications
     end
   end
 end
