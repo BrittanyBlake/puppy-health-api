@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe 'Foods', type: :request do
+RSpec.describe 'Foods API', type: :request do
   # initialize test data
   let!(:foods) { create_list(:food, 3) }
-  let(:food_id) { todos.first.id }
+  let(:food_id) { foods.first.id }
 
   # Test suite for GET /todos
-  describe 'GET /foods' do
+  describe 'GET Foods' do
     # make HTTP get request before each example
-    before { get '/foods' }
+    before { get '/api/v1/foods' }
 
     it 'returns foods' do
       # Note `json` is a custom helper to parse JSON responses
@@ -23,7 +23,7 @@ RSpec.describe 'Foods', type: :request do
 
   # Test suite for GET /todos/:id
   describe 'GET /foods/:id' do
-    before { get "/foods/#{food_id}" }
+    before { get "/api/v1/foods/#{food_id}" }
 
     context 'when the record exists' do
       it 'returns the todo' do
@@ -50,12 +50,12 @@ RSpec.describe 'Foods', type: :request do
   end
 
   # Test suite for POST /todos
-  describe 'POST /foods' do
+  describe 'POST /api/v1/foods' do
     # valid payload
     let(:valid_attributes) { { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020"} }
 
     context 'when the request is valid' do
-      before { post '/foods', params: valid_attributes }
+      before { post '/api/v1/foods', params: valid_attributes }
 
       it 'creates a food' do
         expect(json['brand']).to eq('Caesar Salad')
@@ -67,7 +67,7 @@ RSpec.describe 'Foods', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/food', params: { brand: 'Foobar' } }
+      before { post '/api/v1/foods', params: { brand: 'Foobar' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -75,17 +75,17 @@ RSpec.describe 'Foods', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Created by can't be blank/)
+          .to match(/Validation failed: Amount can't be blank, Date can't be blank, Time can't be blank/)
       end
     end
   end
 
   # Test suite for PUT /todos/:id
-  describe 'PUT /foods/:id' do
+  describe 'PUT /api/v1/foods/:id' do
     let(:valid_attributes) { { brand: 'Cobb Salad', amount: '20', time:'11:53', date: "Sat, 07 Nov 2020"} }
 
     context 'when the record exists' do
-      before { put "/foods/#{food_id}", params: valid_attributes }
+      before { put "/api/v1/foods/#{food_id}", params: valid_attributes }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -98,8 +98,8 @@ RSpec.describe 'Foods', type: :request do
   end
 
   # Test suite for DELETE /todos/:id
-  describe 'DELETE /foods/:id' do
-    before { delete "/foods/#{food_id}" }
+  describe 'DELETE /api/v1/foods/:id' do
+    before { delete "/api/v1/foods/#{food_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
