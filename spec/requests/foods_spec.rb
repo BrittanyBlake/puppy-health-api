@@ -1,17 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Foods API', type: :request do
-  # initialize test data
   let!(:foods) { create_list(:food, 3) }
   let(:food_id) { foods.first.id }
 
-  # Test suite for GET /todos
   describe 'GET Foods' do
-    # make HTTP get request before each example
     before { get '/api/v1/foods' }
 
     it 'returns foods' do
-      # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
       expect(json.size).to eq(3)
     end
@@ -21,7 +17,6 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  # Test suite for GET /todos/:id
   describe 'GET /foods/:id' do
     before { get "/api/v1/foods/#{food_id}" }
 
@@ -49,9 +44,7 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  # Test suite for POST /todos
   describe 'POST /api/v1/foods' do
-    # valid payload
     let(:valid_attributes) { { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020"} }
 
     context 'when the request is valid' do
@@ -80,7 +73,6 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  # Test suite for PUT /todos/:id
   describe 'PUT /api/v1/foods/:id' do
     let(:valid_attributes) { { brand: 'Cobb Salad', amount: '20', time:'11:53', date: "Sat, 07 Nov 2020"} }
 
@@ -97,7 +89,6 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 
-  # Test suite for DELETE /todos/:id
   describe 'DELETE /api/v1/foods/:id' do
     before { delete "/api/v1/foods/#{food_id}" }
 
