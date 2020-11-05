@@ -44,7 +44,7 @@ RSpec.describe 'Treats API', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find treat/)
+        expect(response.body).to match(/Couldn't find Treat with 'id'=#{treat_id}/)
       end
     end
   end
@@ -52,13 +52,13 @@ RSpec.describe 'Treats API', type: :request do
   # Test suite for POST //api/v1/treats
   describe 'POST /api/v1/treats' do
     # valid payload
-    let(:valid_attributes) { { type: 'Peaches', amount: '12', date: "Fri, 06 Nov 2020"} }
+    let(:valid_attributes) { { treat_type: 'Peaches', amount: '12', date: "Fri, 06 Nov 2020"} }
 
     context 'when the request is valid' do
       before { post '/api/v1/treats', params: valid_attributes }
 
       it 'creates a treat' do
-        expect(json['type']).to eq('Peaches')
+        expect(json['treat_type']).to eq('Peaches')
       end
 
       it 'returns status code 201' do
@@ -67,7 +67,7 @@ RSpec.describe 'Treats API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/treats', params: { type: 'Foobar' } }
+      before { post '/api/v1/treats', params: { treat_type: 'Foobar' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -82,7 +82,7 @@ RSpec.describe 'Treats API', type: :request do
 
   # Test suite for PUT //api/v1/treats/:id
   describe 'PUT /api/v1/treats/:id' do
-    let(:valid_attributes) { { type: 'Apples', amount: '20', date: "Sat, 07 Nov 2020"} }
+    let(:valid_attributes) { { treat_type: 'Apples', amount: '20', date: "Sat, 07 Nov 2020"} }
 
     context 'when the record exists' do
       before { put "/api/v1/treats/#{treat_id}", params: valid_attributes }

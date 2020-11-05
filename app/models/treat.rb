@@ -1,3 +1,3 @@
 class Treat < ApplicationRecord
-      validates_presence_of :type, :amount, :date
+      validates_presence_of :treat_type, :amount, :date
 end
