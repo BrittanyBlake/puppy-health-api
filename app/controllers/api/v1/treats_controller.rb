@@ -3,13 +3,13 @@ class Api::V1::TreatsController < ApplicationController
 
     #GET /foods
     def index
-        @treats = Treat.all
+        @treats = current_user.treats
         json_response(@treats)
     end
 
      # POST /foods
   def create
-    @treat = Treat.create!(treat_params)
+    @treat = current_user.treats.create!(treat_params)
     json_response(@treat, :created)
   end
 

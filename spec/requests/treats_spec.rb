@@ -4,11 +4,12 @@ RSpec.describe 'Treats API', type: :request do
   let(:user) { create(:user) }
   let!(:treats) { create_list(:treat, 4, user_id: user.id) }
   let(:treat_id) { treats.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET //api/v1/treats
   describe 'GET Treats' do
     # make HTTP get request before each example
-    before { get '/api/v1/treats' }
+    before { get '/api/v1/treats', params: {}, headers: headers  }
 
     it 'returns treats' do
       # Note `json` is a custom helper to parse JSON responses
@@ -23,7 +24,7 @@ RSpec.describe 'Treats API', type: :request do
 
   # Test suite for GET //api/v1/treats/:id
   describe 'GET /treats/:id' do
-    before { get "/api/v1/treats/#{treat_id}" }
+    before { get "/api/v1/treats/#{treat_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the treat' do
@@ -52,10 +53,10 @@ RSpec.describe 'Treats API', type: :request do
   # Test suite for POST //api/v1/treats
   describe 'POST /api/v1/treats' do
     # valid payload
-    let(:valid_attributes) { { treat_type: 'Peaches', amount: '12', date: "Fri, 06 Nov 2020"} }
+    let(:valid_attributes) { { treat_type: 'Peaches', amount: '12', date: "Fri, 06 Nov 2020"}.to_json }
 
     context 'when the request is valid' do
-      before { post '/api/v1/treats', params: valid_attributes }
+      before { post '/api/v1/treats', params: valid_attributes, headers: headers }
 
       it 'creates a treat' do
         expect(json['treat_type']).to eq('Peaches')
@@ -67,7 +68,9 @@ RSpec.describe 'Treats API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/treats', params: { treat_type: 'Foobar' } }
+      let(:invalid_attributes) { { treat_type: nil, amount: nil, date: nil }.to_json }
+
+      before { post '/api/v1/treats', params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -75,17 +78,17 @@ RSpec.describe 'Treats API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Amount can't be blank, Date can't be blank/)
+          .to match(/Validation failed: Treat type can't be blank, Amount can't be blank, Date can't be blank/)
       end
     end
   end
 
   # Test suite for PUT //api/v1/treats/:id
   describe 'PUT /api/v1/treats/:id' do
-    let(:valid_attributes) { { treat_type: 'Apples', amount: '20', date: "Sat, 07 Nov 2020"} }
+    let(:valid_attributes) { { treat_type: 'Apples', amount: '20', date: "Sat, 07 Nov 2020", user_id: user.id}.to_json }
 
     context 'when the record exists' do
-      before { put "/api/v1/treats/#{treat_id}", params: valid_attributes }
+      before { put "/api/v1/treats/#{treat_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -99,7 +102,7 @@ RSpec.describe 'Treats API', type: :request do
 
   # Test suite for DELETE //api/v1/treats/:id
   describe 'DELETE /api/v1/treats/:id' do
-    before { delete "/api/v1/treats/#{treat_id}" }
+    before { delete "/api/v1/treats/#{treat_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
