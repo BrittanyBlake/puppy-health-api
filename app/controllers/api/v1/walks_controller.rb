@@ -3,13 +3,13 @@ class Api::V1::WalksController < ApplicationController
 
     #GET /foods
     def index
-        @walks = Walk.all
+        @walks = current_user.walks
         json_response(@walks)
     end
 
      # POST /foods
   def create
-    @walk = Walk.create!(walk_params)
+    @walk = current_user.walks.create!(walk_params)
     json_response(@walk, :created)
   end
 
