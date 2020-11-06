@@ -54,6 +54,7 @@ RSpec.configure do |config|
 
    # previously `config.include RequestSpecHelper, type: :request`
   config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 
   # add `FactoryBot` methods
   config.include FactoryBot::Syntax::Methods
