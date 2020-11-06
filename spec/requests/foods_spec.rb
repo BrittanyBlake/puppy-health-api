@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rubocop:disable LineLength
 RSpec.describe 'Foods API', type: :request do
   let(:user) { create(:user) }
   let!(:foods) { create_list(:food, 3, user_id: user.id) }
@@ -74,8 +74,7 @@ RSpec.describe 'Foods API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Brand can't be blank, Amount can't be blank,
-          Date can't be blank, Time can't be blank/)
+          .to match(/Validation failed: Brand can't be blank, Amount can't be blank, Date can't be blank, Time can't be blank/)
       end
     end
   end
@@ -104,3 +103,4 @@ RSpec.describe 'Foods API', type: :request do
     end
   end
 end
+# rubocop:enable LineLength
