@@ -3,13 +3,13 @@ class Api::V1::MedicationsController < ApplicationController
 
     #GET /medications
     def index
-        @medications = Medication.all
+        @medications = current_user.medications
         json_response(@medications)
     end
 
      # POST /medications
   def create
-    @medication = Medication.create!(medication_params)
+    @medication = current_user.medications.create!(medication_params)
     json_response(@medication, :created)
   end
 
