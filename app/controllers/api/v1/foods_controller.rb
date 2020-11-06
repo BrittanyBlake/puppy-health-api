@@ -3,13 +3,13 @@ class Api::V1::FoodsController < ApplicationController
 
     #GET /foods
     def index
-        @foods = Food.all
+        @foods = current_user.foods
         json_response(@foods)
     end
 
      # POST /foods
   def create
-    @food = Food.create!(food_params)
+    @food = current_user.foods.create!(food_params)
     json_response(@food, :created)
   end
 
