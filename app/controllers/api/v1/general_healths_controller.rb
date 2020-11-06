@@ -3,13 +3,13 @@ class Api::V1::GeneralHealthsController < ApplicationController
 
     #GET /general_healths
     def index
-        @general_healths = GeneralHealth.all
+        @general_healths = current_user.general_healths
         json_response(@general_healths)
     end
 
      # POST /general_healths
   def create
-    @general_health = GeneralHealth.create!(general_health_params)
+    @general_health = current_user.general_healths.create!(general_health_params)
     json_response(@general_health, :created)
   end
 
