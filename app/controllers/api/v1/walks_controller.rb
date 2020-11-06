@@ -1,13 +1,13 @@
 class Api::V1::WalksController < ApplicationController
-    before_action :set_walks, only: [:show, :update, :destroy]
+  before_action :set_walks, only: [:show, :update, :destroy]
 
-    #GET /foods
-    def index
-        @walks = current_user.walks
-        json_response(@walks)
-    end
+  # GET /foods
+  def index
+    @walks = current_user.walks
+    json_response(@walks)
+  end
 
-     # POST /foods
+  # POST /foods
   def create
     @walk = current_user.walks.create!(walk_params)
     json_response(@walk, :created)

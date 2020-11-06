@@ -49,7 +49,7 @@ RSpec.describe 'Foods API', type: :request do
 
   describe 'POST /api/v1/foods' do
     let(:valid_attributes) do
-       { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020", user_id: user.id }.to_json 
+      { brand: 'Caesar Salad', amount: '10', time: '12:53', date: "Fri, 06 Nov 2020", user_id: user.id }.to_json
     end
 
     context 'when the request is valid' do
@@ -74,13 +74,14 @@ RSpec.describe 'Foods API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Brand can't be blank, Amount can't be blank, Date can't be blank, Time can't be blank/)
+          .to match(/Validation failed: Brand can't be blank, Amount can't be blank,
+          Date can't be blank, Time can't be blank/)
       end
     end
   end
 
   describe 'PUT /api/v1/foods/:id' do
-    let(:valid_attributes) { { brand: 'Cobb Salad', amount: '20', time:'11:53', date: "Sat, 07 Nov 2020"}.to_json }
+    let(:valid_attributes) { { brand: 'Cobb Salad', amount: '20', time: '11:53', date: "Sat, 07 Nov 2020" }.to_json }
 
     context 'when the record exists' do
       before { put "/api/v1/foods/#{food_id}", params: valid_attributes, headers: headers }

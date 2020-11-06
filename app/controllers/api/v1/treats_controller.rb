@@ -1,13 +1,13 @@
 class Api::V1::TreatsController < ApplicationController
-    before_action :set_treats, only: [:show, :update, :destroy]
+  before_action :set_treats, only: [:show, :update, :destroy]
 
-    #GET /foods
-    def index
-        @treats = current_user.treats
-        json_response(@treats)
-    end
+  # GET /foods
+  def index
+    @treats = current_user.treats
+    json_response(@treats)
+  end
 
-     # POST /foods
+  # POST /foods
   def create
     @treat = current_user.treats.create!(treat_params)
     json_response(@treat, :created)

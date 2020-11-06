@@ -1,13 +1,13 @@
 class Api::V1::GeneralHealthsController < ApplicationController
-     before_action :set_general_health, only: [:show, :update, :destroy]
+  before_action :set_general_health, only: [:show, :update, :destroy]
 
-    #GET /general_healths
-    def index
-        @general_healths = current_user.general_healths
-        json_response(@general_healths)
-    end
+  # GET /general_healths
+  def index
+    @general_healths = current_user.general_healths
+    json_response(@general_healths)
+  end
 
-     # POST /general_healths
+  # POST /general_healths
   def create
     @general_health = current_user.general_healths.create!(general_health_params)
     json_response(@general_health, :created)

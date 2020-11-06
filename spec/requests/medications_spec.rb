@@ -47,7 +47,7 @@ RSpec.describe 'Medication API', type: :request do
   end
 
   describe 'POST /api/v1/medications' do
-    let(:valid_attributes) { { name: 'Elm', use: 'Learn', dosage:'Twice a day', user_id: user.id}.to_json }
+    let(:valid_attributes) { { name: 'Elm', use: 'Learn', dosage: 'Twice a day', user_id: user.id }.to_json }
 
     context 'when the request is valid' do
       before { post '/api/v1/medications', params: valid_attributes, headers: headers }
@@ -77,7 +77,7 @@ RSpec.describe 'Medication API', type: :request do
   end
 
   describe 'PUT /api/v1/medications/:id' do
-    let(:valid_attributes) { { name: 'Elm', use: 'learn', dosage:'Once a day'}.to_json }
+    let(:valid_attributes) { { name: 'Elm', use: 'learn', dosage: 'Once a day' }.to_json }
 
     context 'when the record exists' do
       before { put "/api/v1/medications/#{medication_id}", params: valid_attributes, headers: headers }
@@ -99,5 +99,4 @@ RSpec.describe 'Medication API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
 end

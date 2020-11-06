@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Walks API', type: :request do
   let(:user) { create(:user) }
-    let!(:walks) { create_list(:walk, 2, user_id: user.id) }
-    let(:walk_id) { walks.first.id }
-    let(:headers) { valid_headers }
+  let!(:walks) { create_list(:walk, 2, user_id: user.id) }
+  let(:walk_id) { walks.first.id }
+  let(:headers) { valid_headers }
 
   describe 'GET Walks' do
-    before { get '/api/v1/walks', params: {}, headers: headers  }
+    before { get '/api/v1/walks', params: {}, headers: headers }
 
     it 'returns walks' do
       expect(json).not_to be_empty
@@ -47,7 +47,7 @@ RSpec.describe 'Walks API', type: :request do
   end
 
   describe 'POST /api/v1/walks' do
-    let(:valid_attributes) { { distance: '10', time:'12:53', date: "Fri, 06 Nov 2020"}.to_json }
+    let(:valid_attributes) { { distance: '10', time: '12:53', date: "Fri, 06 Nov 2020" }.to_json }
 
     context 'when the request is valid' do
       before { post '/api/v1/walks', params: valid_attributes, headers: headers }
@@ -62,7 +62,7 @@ RSpec.describe 'Walks API', type: :request do
     end
 
     context 'when the request is invalid' do
-       let(:invalid_attributes) { { distance: nil, time: nil, date: nil}.to_json }
+      let(:invalid_attributes) { { distance: nil, time: nil, date: nil }.to_json }
       before { post '/api/v1/walks', params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do
@@ -77,7 +77,7 @@ RSpec.describe 'Walks API', type: :request do
   end
 
   describe 'PUT /api/v1/walks/:id' do
-    let(:valid_attributes) { { distance: '20', time:'11:53', date: "Sat, 07 Nov 2020"}.to_json }
+    let(:valid_attributes) { { distance: '20', time: '11:53', date: "Sat, 07 Nov 2020" }.to_json }
 
     context 'when the record exists' do
       before { put "/api/v1/walks/#{walk_id}", params: valid_attributes, headers: headers }
@@ -99,5 +99,4 @@ RSpec.describe 'Walks API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
 end

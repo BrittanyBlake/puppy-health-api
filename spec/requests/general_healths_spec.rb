@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'General Health API', type: :request do
-    let(:user) { create(:user) }
-     let!(:general_healths) { create_list(:general_health, 3, user_id: user.id) }
-     
-     let(:general_health_id) { general_healths.first.id }
-     let(:headers) { valid_headers }
+  let(:user) { create(:user) }
+  let!(:general_healths) { create_list(:general_health, 3, user_id: user.id) }
+
+  let(:general_health_id) { general_healths.first.id }
+  let(:headers) { valid_headers }
 
   describe 'GET /General Health' do
     before { get '/api/v1/general_healths', params: {}, headers: headers }
@@ -48,7 +48,10 @@ RSpec.describe 'General Health API', type: :request do
   end
 
   describe 'POST /api/v1/general_healths' do
-    let(:valid_attributes) { { hunger_level: 'normal', energy_level: 'normal', date:'October 21, 2020 20:47', user_id: user.id}.to_json }
+    let(:valid_attributes) {
+      { hunger_level: 'normal', energy_level: 'normal', date:
+    'October 21, 2020 20:47', user_id: user.id }.to_json
+    }
 
     context 'when the request is valid' do
       before { post '/api/v1/general_healths', params: valid_attributes, headers: headers }
@@ -63,7 +66,7 @@ RSpec.describe 'General Health API', type: :request do
     end
 
     context 'when the request is invalid' do
-      let(:invalid_attributes){{ energy_level: nil, hunger_level: nil, date: nil }.to_json}
+      let(:invalid_attributes) { { energy_level: nil, hunger_level: nil, date: nil }.to_json }
       before { post '/api/v1/general_healths', params: invalid_attributes, headers: headers }
 
       it 'returns status code 422' do
@@ -78,10 +81,10 @@ RSpec.describe 'General Health API', type: :request do
   end
 
   describe 'PUT /api/v1/general_healths/:id' do
-    let(:valid_attributes) { { hunger_level: 'high', energy_level: 'low', date:'October 21, 2020 20:47'}.to_json }
+    let(:valid_attributes) { { hunger_level: 'high', energy_level: 'low', date: 'October 21, 2020 20:47' }.to_json }
 
     context 'when the record exists' do
-      before { put "/api/v1/general_healths/#{general_health_id}", params: valid_attributes, headers: headers  }
+      before { put "/api/v1/general_healths/#{general_health_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -100,6 +103,4 @@ RSpec.describe 'General Health API', type: :request do
       expect(response).to have_http_status(204)
     end
   end
-
-
 end

@@ -1,13 +1,13 @@
 class Api::V1::FoodsController < ApplicationController
-    before_action :set_food, only: [:show, :update, :destroy]
+  before_action :set_food, only: [:show, :update, :destroy]
 
-    #GET /foods
-    def index
-        @foods = current_user.foods
-        json_response(@foods)
-    end
+  # GET /foods
+  def index
+    @foods = current_user.foods
+    json_response(@foods)
+  end
 
-     # POST /foods
+  # POST /foods
   def create
     @food = current_user.foods.create!(food_params)
     json_response(@food, :created)

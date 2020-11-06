@@ -1,13 +1,13 @@
 class Api::V1::MedicationsController < ApplicationController
-    before_action :set_medication, only: [:show, :update, :destroy]
+  before_action :set_medication, only: [:show, :update, :destroy]
 
-    #GET /medications
-    def index
-        @medications = current_user.medications
-        json_response(@medications)
-    end
+  # GET /medications
+  def index
+    @medications = current_user.medications
+    json_response(@medications)
+  end
 
-     # POST /medications
+  # POST /medications
   def create
     @medication = current_user.medications.create!(medication_params)
     json_response(@medication, :created)
