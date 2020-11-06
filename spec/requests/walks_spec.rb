@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Walks API', type: :request do
-    let!(:walks) { create_list(:walk, 2) }
+  let(:user) { create(:user) }
+    let!(:walks) { create_list(:walk, 2, user_id: user.id) }
     let(:walk_id) { walks.first.id }
 
   describe 'GET Walks' do

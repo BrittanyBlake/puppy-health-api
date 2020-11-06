@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Foods API', type: :request do
-  let!(:foods) { create_list(:food, 3) }
+  let(:user) { create(:user) }
+  let!(:foods) { create_list(:food, 3, user_id: user.id) }
   let(:food_id) { foods.first.id }
 
   describe 'GET Foods' do
@@ -45,7 +46,7 @@ RSpec.describe 'Foods API', type: :request do
   end
 
   describe 'POST /api/v1/foods' do
-    let(:valid_attributes) { { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020"} }
+    let(:valid_attributes) { { brand: 'Caesar Salad', amount: '10', time:'12:53', date: "Fri, 06 Nov 2020", user_id: user.id} }
 
     context 'when the request is valid' do
       before { post '/api/v1/foods', params: valid_attributes }

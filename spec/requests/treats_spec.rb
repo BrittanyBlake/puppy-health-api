@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Treats API', type: :request do
-    # initialize test data
-  let!(:treats) { create_list(:treat, 4) }
+  let(:user) { create(:user) }
+  let!(:treats) { create_list(:treat, 4, user_id: user.id) }
   let(:treat_id) { treats.first.id }
 
   # Test suite for GET //api/v1/treats

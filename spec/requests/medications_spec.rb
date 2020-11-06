@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Medication API', type: :request do
-  let!(:medications) { create_list(:medication, 3) }
+  let(:user) { create(:user) }
+  let!(:medications) { create_list(:medication, 3, user_id: user.id) }
   let(:medication_id) { medications.first.id }
 
   describe 'GET Medication' do

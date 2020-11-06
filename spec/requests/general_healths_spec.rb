@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'General Health API', type: :request do
-     let!(:general_healths) { create_list(:general_health, 3) }
+    let(:user) { create(:user) }
+     let!(:general_healths) { create_list(:general_health, 3, user_id: user.id) }
   let(:general_health_id) { general_healths.first.id }
 
   describe 'GET General Health' do
