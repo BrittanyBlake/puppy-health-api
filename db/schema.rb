@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_075723) do
+ActiveRecord::Schema.define(version: 2020_11_10_183242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2020_11_06_075723) do
     t.index ["user_id"], name: "index_medications_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "breed"
+    t.integer "goal_weight"
+    t.integer "current_weight"
+    t.datetime "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "treats", force: :cascade do |t|
     t.string "treat_type"
     t.integer "amount"
@@ -64,12 +75,8 @@ ActiveRecord::Schema.define(version: 2020_11_06_075723) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "breed"
-    t.integer "goal_weight"
-    t.integer "current_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date_of_birth"
   end
 
   create_table "walks", force: :cascade do |t|
@@ -85,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_075723) do
   add_foreign_key "foods", "users"
   add_foreign_key "general_healths", "users"
   add_foreign_key "medications", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "treats", "users"
   add_foreign_key "walks", "users"
 end
