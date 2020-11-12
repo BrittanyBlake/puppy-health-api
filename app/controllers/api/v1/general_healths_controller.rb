@@ -3,7 +3,7 @@ class Api::V1::GeneralHealthsController < ApplicationController
 
   # GET /general_healths
   def index
-    @general_healths = current_user.general_healths
+    @general_healths = current_user.general_healths.order('date DESC')
     json_response(@general_healths)
   end
 

@@ -3,7 +3,7 @@ class Api::V1::FoodsController < ApplicationController
 
   # GET /foods
   def index
-    @foods = current_user.foods
+    @foods = current_user.foods.order('date DESC')
     json_response(@foods)
   end
 
