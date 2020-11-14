@@ -1,5 +1,5 @@
 class Api::V1::MedicationsController < ApplicationController
-  before_action :set_medication, only: %i[show update destroy]
+  before_action :set_medication, only: %i[show]
 
   # GET /medications
   def index
@@ -18,17 +18,17 @@ class Api::V1::MedicationsController < ApplicationController
     json_response(@medication)
   end
 
-  # PUT /medications/:id
-  def update
-    @medication.update(medication_params)
-    head :no_content
-  end
+  # # PUT /medications/:id
+  # def update
+  #   @medication.update(medication_params)
+  #   head :no_content
+  # end
 
-  # DELETE /medications/:id
-  def destroy
-    @medication.destroy
-    head :no_content
-  end
+  # # DELETE /medications/:id
+  # def destroy
+  #   @medication.destroy
+  #   head :no_content
+  # end
 
   private
 

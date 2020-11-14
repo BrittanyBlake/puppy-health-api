@@ -1,5 +1,5 @@
 class Api::V1::AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[show update destroy]
+  before_action :set_appointment, only: [:show]
 
   # GET /appointments
   def index
@@ -18,17 +18,17 @@ class Api::V1::AppointmentsController < ApplicationController
     json_response(@appointment)
   end
 
-  # PUT /appointments/:id
-  def update
-    @appointment.update(appointment_params)
-    head :no_content
-  end
+  # # PUT /appointments/:id
+  # def update
+  #   @appointment.update(appointment_params)
+  #   head :no_content
+  # end
 
-  # DELETE /appointments/:id
-  def destroy
-    @appointment.destroy
-    head :no_content
-  end
+  # # DELETE /appointments/:id
+  # def destroy
+  #   @appointment.destroy
+  #   head :no_content
+  # end
 
   private
 

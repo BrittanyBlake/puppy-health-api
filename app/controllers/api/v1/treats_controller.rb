@@ -1,5 +1,5 @@
 class Api::V1::TreatsController < ApplicationController
-  before_action :set_treats, only: %i[show update destroy]
+  before_action :set_treats, only: [:show]
 
   # GET /foods
   def index
@@ -18,17 +18,17 @@ class Api::V1::TreatsController < ApplicationController
     json_response(@treat)
   end
 
-  # PUT /foods/:id
-  def update
-    @treat.update(treat_params)
-    head :no_content
-  end
+  # # PUT /foods/:id
+  # def update
+  #   @treat.update(treat_params)
+  #   head :no_content
+  # end
 
-  # DELETE /foods/:id
-  def destroy
-    @treat.destroy
-    head :no_content
-  end
+  # # DELETE /foods/:id
+  # def destroy
+  #   @treat.destroy
+  #   head :no_content
+  # end
 
   private
 

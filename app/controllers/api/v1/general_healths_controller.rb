@@ -1,5 +1,5 @@
 class Api::V1::GeneralHealthsController < ApplicationController
-  before_action :set_general_health, only: %i[show update destroy]
+  before_action :set_general_health, only: [:show]
 
   # GET /general_healths
   def index
@@ -18,17 +18,17 @@ class Api::V1::GeneralHealthsController < ApplicationController
     json_response(@general_health)
   end
 
-  # PUT /general_healths/:id
-  def update
-    @general_health.update(general_health_params)
-    head :no_content
-  end
+  # # PUT /general_healths/:id
+  # def update
+  #   @general_health.update(general_health_params)
+  #   head :no_content
+  # end
 
-  # DELETE /general_healths/:id
-  def destroy
-    @general_health.destroy
-    head :no_content
-  end
+  # # DELETE /general_healths/:id
+  # def destroy
+  #   @general_health.destroy
+  #   head :no_content
+  # end
 
   private
 

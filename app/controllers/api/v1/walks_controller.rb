@@ -1,5 +1,5 @@
 class Api::V1::WalksController < ApplicationController
-  before_action :set_walks, only: %i[show update destroy]
+  before_action :set_walks, only: %i[show]
 
   # GET /foods
   def index
@@ -18,17 +18,17 @@ class Api::V1::WalksController < ApplicationController
     json_response(@walk)
   end
 
-  # PUT /foods/:id
-  def update
-    @walk.update(walk_params)
-    head :no_content
-  end
+  # # PUT /foods/:id
+  # def update
+  #   @walk.update(walk_params)
+  #   head :no_content
+  # end
 
-  # DELETE /foods/:id
-  def destroy
-    @walk.destroy
-    head :no_content
-  end
+  # # DELETE /foods/:id
+  # def destroy
+  #   @walk.destroy
+  #   head :no_content
+  # end
 
   private
 
