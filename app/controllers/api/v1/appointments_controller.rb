@@ -34,7 +34,7 @@ class Api::V1::AppointmentsController < ApplicationController
 
   def appointment_params
     # whitelist params
-    params.permit(:type, :location, :date, :time)
+    params.require(:appointment).permit(:appt_type, :location, :date, :time)
   end
 
   def set_appointment

@@ -1,4 +1,4 @@
 class Appointment < ApplicationRecord
-    validates_presence_of :location, :type, :date, :time
+    validates_presence_of :location, :date, :time
     belongs_to :user
 end
