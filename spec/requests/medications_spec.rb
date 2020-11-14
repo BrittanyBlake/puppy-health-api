@@ -75,28 +75,4 @@ RSpec.describe 'Medication API', type: :request do
       end
     end
   end
-
-  describe 'PUT /api/v1/medications/:id' do
-    let(:valid_attributes) { { name: 'Elm', use: 'learn', dosage: 'Once a day' }.to_json }
-
-    context 'when the record exists' do
-      before { put "/api/v1/medications/#{medication_id}", params: valid_attributes, headers: headers }
-
-      it 'updates the record' do
-        expect(response.body).to be_empty
-      end
-
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
-      end
-    end
-  end
-
-  describe 'DELETE /api/v1/medications/:id' do
-    before { delete "/api/v1/medications/#{medication_id}", params: {}, headers: headers }
-
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
-    end
-  end
 end
