@@ -1,5 +1,5 @@
 class Api::V1::MedicationsController < ApplicationController
-  before_action :set_medication, only: [:show, :update, :destroy]
+  before_action :set_medication, only: %i[show update destroy]
 
   # GET /medications
   def index

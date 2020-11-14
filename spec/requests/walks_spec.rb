@@ -47,7 +47,7 @@ RSpec.describe 'Walks API', type: :request do
   end
 
   describe 'POST /api/v1/walks' do
-    let(:valid_attributes) { { distance: '10', time: '12:53', date: "Fri, 06 Nov 2020" }.to_json }
+    let(:valid_attributes) { { distance: '10', time: '12:53', date: 'Fri, 06 Nov 2020' }.to_json }
 
     context 'when the request is valid' do
       before { post '/api/v1/walks', params: valid_attributes, headers: headers }
@@ -77,7 +77,7 @@ RSpec.describe 'Walks API', type: :request do
   end
 
   describe 'PUT /api/v1/walks/:id' do
-    let(:valid_attributes) { { distance: '20', time: '11:53', date: "Sat, 07 Nov 2020" }.to_json }
+    let(:valid_attributes) { { distance: '20', time: '11:53', date: 'Sat, 07 Nov 2020' }.to_json }
 
     context 'when the record exists' do
       before { put "/api/v1/walks/#{walk_id}", params: valid_attributes, headers: headers }

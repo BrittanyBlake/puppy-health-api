@@ -1,5 +1,5 @@
 class Api::V1::FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :update, :destroy]
+  before_action :set_food, only: %i[show update destroy]
 
   # GET /foods
   def index

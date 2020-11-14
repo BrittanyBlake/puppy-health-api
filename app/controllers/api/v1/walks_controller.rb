@@ -1,5 +1,5 @@
 class Api::V1::WalksController < ApplicationController
-  before_action :set_walks, only: [:show, :update, :destroy]
+  before_action :set_walks, only: %i[show update destroy]
 
   # GET /foods
   def index

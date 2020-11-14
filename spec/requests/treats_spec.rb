@@ -53,7 +53,7 @@ RSpec.describe 'Treats API', type: :request do
   # Test suite for POST //api/v1/treats
   describe 'POST /api/v1/treats' do
     # valid payload
-    let(:valid_attributes) { { treat_type: 'Peaches', amount: '12', date: "Fri, 06 Nov 2020" }.to_json }
+    let(:valid_attributes) { { treat_type: 'Peaches', amount: '12', date: 'Fri, 06 Nov 2020' }.to_json }
 
     context 'when the request is valid' do
       before { post '/api/v1/treats', params: valid_attributes, headers: headers }
@@ -85,10 +85,10 @@ RSpec.describe 'Treats API', type: :request do
 
   # Test suite for PUT //api/v1/treats/:id
   describe 'PUT /api/v1/treats/:id' do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       { treat_type: 'Apples', amount: '20',
-        date: "Sat, 07 Nov 2020", user_id: user.id }.to_json
-    }
+        date: 'Sat, 07 Nov 2020', user_id: user.id }.to_json
+    end
 
     context 'when the record exists' do
       before { put "/api/v1/treats/#{treat_id}", params: valid_attributes, headers: headers }

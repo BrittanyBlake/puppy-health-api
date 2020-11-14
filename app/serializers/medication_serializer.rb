@@ -1,5 +1,5 @@
 class MedicationSerializer < ActiveModel::Serializer
-    attributes :id, :date, :time, :name, :use, :dosage, :user
+  attributes :id, :date, :time, :name, :use, :dosage, :user
 
-    belongs_to :user
+  belongs_to :user
 end

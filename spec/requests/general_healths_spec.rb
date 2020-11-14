@@ -48,10 +48,10 @@ RSpec.describe 'General Health API', type: :request do
   end
 
   describe 'POST /api/v1/general_healths' do
-    let(:valid_attributes) {
+    let(:valid_attributes) do
       { hunger_level: 'normal', energy_level: 'normal', date:
     'October 21, 2020 20:47', user_id: user.id }.to_json
-    }
+    end
 
     context 'when the request is valid' do
       before { post '/api/v1/general_healths', params: valid_attributes, headers: headers }

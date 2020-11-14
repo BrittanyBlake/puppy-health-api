@@ -1,5 +1,5 @@
 class Api::V1::GeneralHealthsController < ApplicationController
-  before_action :set_general_health, only: [:show, :update, :destroy]
+  before_action :set_general_health, only: %i[show update destroy]
 
   # GET /general_healths
   def index
